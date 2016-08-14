@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- We give our app a name so Angular can work -->
+<html ng-app="navRoutes">
+<head>
+	<title></title>
+
+	<style type="text/css" media="screen">
+		.page{
+			margin-top:  50px;
+		}
+
+		/* The starting CSS styles for the enter animation */
+		.faade.ng-enter {
+		  transition:1.5s linear all;
+		  opacity:0;
+		}
+
+		/* The finishing CSS styles for the enter animation */
+		.faade.ng-enter.ng-enter-active {
+		  opacity:1;
+		}
+
+		.slide-animate.ng-enter, .slide-animate.ng-leave{
+			transition: all linear 8s;
+		}
+
+		.slide-animate.ng-enter.ng-enter-active{
+			position: absolute;
+			left:  1000px;
+		}
+
+		.slide-animate.ng-enter{
+			left: 0;
+		}
+
+	</style>
+
+	<!-- Include Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Include jQuery because Bootstrap needs it -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+	<!-- Include Bootstrap.js so our menu collapses, expands-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<!-- Include Angular. Duh -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+	<!-- Include routes module so we can use ng-view -->
+	<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+
+	<!-- Include animate module so we can animate stuff -->
+	<script src="https://code.angularjs.org/1.5.8/angular-animate.min.js"></script>
+	<!-- Include our custom js script with does everything (right now) -->
+	<script text="text/javascript" src="js/navModule.js"></script>
+	<!-- include our controller specific to the location view -->
+	<script text="text/javascript" src="js/locationsController.js"></script>
+	<!-- include our controller specific to the assassin view -->
+	<script text="text/javascript" src="js/assassinsController.js"></script>
+	<!-- include our controller specific to the zombie view -->
+	<script text="text/javascript" src="js/brainEatersController.js"></script>
+
+</head>
+<!-- Give our controller a name so we can target it -->
+<body ng-controller="navController">
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="row">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theMenu">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#/">
+					Zombies & Ninjas
+				</a>
+
+					<div class="collapse navbar-collapse" id="theMenu">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="#/assassins">Assassins</a>
+							</li>
+							<li>
+								<a href="#/brainEaters">Brain Eaters</a>
+							</li>
+							<li>
+								<a href="#/locations">Locations</a>
+
+							</li>
+						</ul>
+					</div>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Make a div for our ng-view to use. This will be empty HTML. We can then populate it with the routes module. With stock routes, you can only have one ng-view on your page. UI views is a different story... -->
+	<div class="page slide-animate" ng-view>
+	</div>
+	{{message}}
+<!-- 	<a class="message"
+		ng-href="#!/messages/{{messages.id}}"
+		ng-animate-ref="{{messages.id}}"
+		ng-repeat="message in messages">
+		{{message.title}}
+	</a>
+	<div class='messages' ng-animate-ref='{{messages.id}}'>{{messages.title}}</div> -->
+
+	<div ng-if="bool" class="faade">
+	   Fade me in out
+	</div>
+	<button ng-click="bool=true">Fade In!</button>
+	<button ng-click="bool=false">Fade Out!</button>
+
+</body>
+</html>
